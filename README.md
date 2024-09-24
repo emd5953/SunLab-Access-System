@@ -26,13 +26,12 @@ Before you can run the **SUN Lab Access System**, ensure you have the following 
 
 5. **GUI Library (Tkinter, PyQt, or Kivy)**:
    - Make sure you have the necessary Python GUI framework installed (e.g., `Tkinter` comes pre-installed with Python, but PyQt or Kivy might require installation via pip).
-   - Install the required packages listed in `requirements.txt` during setup.
+   - Type in the following in your IDE: 
+   - <code> pip install pyqt5 </code>
 
 
 
 6. **IDE or Code Editor** (Optional):
    - Any Python IDE or text editor like VS Code, PyCharm, or Sublime Text.
 
-"# SUNLAB-Access" 
-"# SUNLAB-Access" 
-"# SUNLAB-Access" 
+
