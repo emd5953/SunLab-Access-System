@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Login</class>
+ <widget class="QDialog" name="Login">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>650</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>650</width>
+    <height>300</height>
+   </size>
+  </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
+  </property>
+  <property name="windowTitle">
+   <string>Login</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+    background-color: rgb(240, 240, 240);
+    font-family: "Yu Gothic UI";
+   </string>
+  </property>
+
+  <widget class="QLabel" name="IDNumber">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>70</y>
+     <width>71</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+     font-size:12pt;
+     font-weight: bold;
+     color: rgb(50, 50, 50);
+    </string>
+   </property>
+   <property name="text">
+    <string>ID Number</string>
+   </property>
+  </widget>
+
+  <widget class="QPushButton" name="accessButton">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>70</y>
+     <width>131</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+     background-color: rgb(100, 150, 255);
+     font-size: 12pt;
+     border-radius: 5px;
+     color: white;
+     padding: 5px;
+    </string>
+   </property>
+   <property name="text">
+    <string>Access</string>
+   </property>
+  </widget>
+
+  <widget class="QLineEdit" name="IDTextBox">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>70</y>
+     <width>271</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+     background-color: rgb(255, 255, 255);
+     border: 1px solid rgb(180, 180, 180);
+     padding-left: 5px;
+     font-size: 12pt;
+    </string>
+   </property>
+  </widget>
+
+  <widget class="QRadioButton" name="in_radio">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>40</y>
+     <width>82</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+     font-size: 12pt;
+     color: rgb(50, 50, 50);
+    </string>
+   </property>
+   <property name="text">
+    <string>In</string>
+   </property>
+  </widget>
+
+  <widget class="QRadioButton" name="out_radio">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>40</y>
+     <width>82</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+     font-size: 12pt;
+     color: rgb(50, 50, 50);
+    </string>
+   </property>
+   <property name="text">
+    <string>Out</string>
+   </property>
+  </widget>
+
+  <widget class="QRadioButton" name="admin_radio">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>110</y>
+     <width>82</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">
+     font-size: 12pt;
+     color: rgb(50, 50, 50);
+    </string>
+   </property>
+   <property name="text">
+    <string>Admin</string>
+   </property>
+  </widget>
+
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>129</y>
+     <width>491</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Messages</string>
+   </property>
+
+   <widget class="QLabel" name="redLabel">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>451</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+      color: rgb(200, 0, 0);
+      font-size: 12pt;
+      border: none;
+     </string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+
+   <widget class="QLabel" name="greenLabel">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>50</y>
+      <width>451</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+      color: rgb(0, 200, 0);
+      font-size: 12pt;
+      border: none;
+     </string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
