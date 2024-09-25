@@ -43,15 +43,11 @@ The **SUN Lab Access System** is designed to track and manage access to the Stud
 
 ## Technology Stack
 - **Programming Language**: Python 3
-- **Database**: Firebase (NoSQL)
+- **Database**: Firebase (NoSQL) or any of your choice.
 - **GUI Framework**: TBD (suggesting `Tkinter`, `PyQt`, or `Kivy`)
 - **Version Control**: Git
 
-## Instructions to Run the Project
-(TBD: Add instructions for setting up the environment, running the code, etc.)
-
-## Future Work
-- Add support for different user types (faculty, staff, janitors).
-- Implement user account activation, suspension, and reactivation.
-
 ## Repository Structure
+- It is best to practice organization and order.
+- Use of proper folder names and organizing your file's locations.
+- Use of Markdown for Documentation and Comments.
