@@ -1,295 +1,285 @@
 {
-    "labAccess": {
-      "256898679": {
-        "access": "true",
-        "affiliation": "faculty",
-        "name": "William Turner"
-      },
-      "058194970": {
-        "access": "false",
-        "affiliation": "student",
-        "name": "Michael Harris"
-      },
-      "689829528": {
-        "access": "false",
-        "affiliation": "student",
-        "name": "Linda Clark"
-      },
-      "329895147": {
-        "access": "true",
-        "affiliation": "faculty",
-        "name": "David Johnson"
-      },
-      "581044869": {
-        "access": "true",
-        "affiliation": "faculty",
-        "name": "Susan Mitchell"
-      },
-      "512911455": {
-        "access": "false",
-        "affiliation": "student",
-        "name": "Sarah Clark"
-      },
-      "068651031": {
-        "access": "true",
-        "affiliation": "faculty",
-        "name": "Susan Clark"
-      },
-      "905261542": {
-        "access": "false",
-        "affiliation": "student",
-        "name": "Patricia Walker"
-      },
-      "127607224": {
-        "access": "true",
-        "affiliation": "faculty",
-        "name": "Emily King"
-      },
-      "208649404": {
-        "access": "false",
-        "affiliation": "student",
-        "name": "Robert Thomas"
-      },
-      "588747183": {
-        "access": "true",
-        "affiliation": "faculty",
-        "name": "Susan Smith"
-      },
-      "174915298": {
-        "access": "false",
-        "affiliation": "student",
-        "name": "William Hernandez"
-      },
-      "720388034": {
-        "access": "true",
-        "affiliation": "faculty",
-        "name": "Matthew Harris"
-      },
-      "154664042": {
-        "access": "true",
-        "affiliation": "faculty",
-        "name": "Robert Scott"
-      },
-      "668229123": {
-        "access": "false",
-        "affiliation": "student",
-        "name": "Sandra Thomas"
-      },
-      "879456900": {
-        "access": "true",
-        "affiliation": "faculty",
-        "name": "Richard Martinez"
-      },
-      "642440722": {
-        "access": "false",
-        "affiliation": "student",
-        "name": "Angela Garcia"
-      },
-      "269447653": {
-        "access": "true",
-        "affiliation": "faculty",
-        "name": "Richard Jackson"
-      },
-      "454322344": {
-        "access": "false",
-        "affiliation": "student",
-        "name": "Susan Nelson"
-      },
-      "116104793": {
-        "access": "true",
-        "affiliation": "faculty",
-        "name": "Richard Garcia"
-      },
-      "675002467": {
-        "access": "true",
-        "affiliation": "faculty",
-        "name": "Paul Doe"
-      },
-      "985146733": {
-        "access": "false",
-        "affiliation": "student",
-        "name": "Susan Lewis"
-      },
-      "252998804": {
-        "access": "true",
-        "affiliation": "faculty",
-        "name": "Jennifer Clark"
-      },
-      "102342318": {
-        "access": "false",
-        "affiliation": "student",
-        "name": "Donna Martinez"
-      },
-      "319400077": {
-        "access": "true",
-        "affiliation": "faculty",
-        "name": "Lisa Clark"
-      },
-      "455268690": {
-        "access": "true",
-        "affiliation": "faculty",
-        "name": "Lisa Turner"
-      },
-      "979095777": {
-        "access": "false",
-        "affiliation": "student",
-        "name": "Charles Jackson"
-      },
-      "346178022": {
-        "access": "false",
-        "affiliation": "student",
-        "name": "Mark Truman"
-      },
-      "018829836": {
-        "access": "true",
-        "affiliation": "faculty",
-        "name": "Nancy Scott"
-      },
-      "601440716": {
-        "access": "false",
-        "affiliation": "student",
-        "name": "William Brown"
-      },
-      "129773328": {
-        "access": "true",
-        "affiliation": "faculty",
-        "name": "Mark Clark"
-      },
-      "217543266": {
-        "access": "false",
-        "affiliation": "student",
-        "name": "Kimberly Turner"
-      }
+  "labAccess": {
+    "459082134": {
+      "access": "true",
+      "affiliation": "faculty",
+      "name": "Alice Johnson"
     },
-    "logData": {
-      "256898679": {
-        "datetime": "",
-        "name": "William Turner"
-      },
-      "058194970": {
-        "datetime": "",
-        "name": "Michael Harris"
-      },
-      "689829528": {
-        "datetime": "",
-        "name": "Linda Clark"
-      },
-      "329895147": {
-        "datetime": "",
-        "name": "David Johnson"
-      },
-      "581044869": {
-        "datetime": "",
-        "name": "Susan Mitchell"
-      },
-      "512911455": {
-        "datetime": "",
-        "name": "Sarah Clark"
-      },
-      "068651031": {
-        "datetime": "",
-        "name": "Susan Clark"
-      },
-      "905261542": {
-        "datetime": "",
-        "name": "Patricia Walker"
-      },
-      "127607224": {
-        "datetime": "",
-        "name": "Emily King"
-      },
-      "208649404": {
-        "datetime": "",
-        "name": "Robert Thomas"
-      },
-      "588747183": {
-        "datetime": "",
-        "name": "Susan Smith"
-      },
-      "174915298": {
-        "datetime": "",
-        "name": "William Hernandez"
-      },
-      "720388034": {
-        "datetime": "",
-        "name": "Matthew Harris"
-      },
-      "154664042": {
-        "datetime": "",
-        "name": "Robert Scott"
-      },
-      "668229123": {
-        "datetime": "",
-        "name": "Sandra Thomas"
-      },
-      "879456900": {
-        "datetime": "",
-        "name": "Richard Martinez"
-      },
-      "642440722": {
-        "datetime": "",
-        "name": "Angela Garcia"
-      },
-      "269447653": {
-        "datetime": "",
-        "name": "Richard Jackson"
-      },
-      "454322344": {
-        "datetime": "",
-        "name": "Susan Nelson"
-      },
-      "116104793": {
-        "datetime": "",
-        "name": "Richard Garcia"
-      },
-      "675002467": {
-        "datetime": "",
-        "name": "Paul Doe"
-      },
-      "985146733": {
-        "datetime": "",
-        "name": "Susan Lewis"
-      },
-      "252998804": {
-        "datetime": "",
-        "name": "Jennifer Clark"
-      },
-      "102342318": {
-        "datetime": "",
-        "name": "Donna Martinez"
-      },
-      "319400077": {
-        "datetime": "",
-        "name": "Lisa Clark"
-      },
-      "455268690": {
-        "datetime": "",
-        "name": "Lisa Turner"
-      },
-      "979095777": {
-        "datetime": "",
-        "name": "Charles Jackson"
-      },
-      "346178022": {
-        "datetime": "",
-        "name": "Mark Truman"
-      },
-      "018829836": {
-        "datetime": "",
-        "name": "Nancy Scott"
-      },
-      "601440716": {
-        "datetime": "",
-        "name": "William Brown"
-      },
-      "129773328": {
-        "datetime": "",
-        "name": "Mark Clark"
-      },
-      "217543266": {
-        "datetime": "",
-        "name": "Kimberly Turner"
-      }
+    "281936547": {
+      "access": "false",
+      "affiliation": "student",
+      "name": "Brian Lewis"
+    },
+    "729163548": {
+      "access": "true",
+      "affiliation": "faculty",
+      "name": "Catherine Perez"
+    },
+    "581374029": {
+      "access": "false",
+      "affiliation": "student",
+      "name": "Diane Simmons"
+    },
+    "396812547": {
+      "access": "false",
+      "affiliation": "student",
+      "name": "Evan Mitchell"
+    },
+    "527193846": {
+      "access": "true",
+      "affiliation": "faculty",
+      "name": "Franklyn Howard"
+    },
+    "197263548": {
+      "access": "true",
+      "affiliation": "faculty",
+      "name": "Gloria Adams"
+    },
+    "651298347": {
+      "access": "true",
+      "affiliation": "faculty",
+      "name": "Harrison Clark"
+    },
+    "512876394": {
+      "access": "true",
+      "affiliation": "faculty",
+      "name": "Irene Turner"
+    },
+    "381946752": {
+      "access": "false",
+      "affiliation": "student",
+      "name": "Jacob Bell"
+    },
+    "482759301": {
+      "access": "true",
+      "affiliation": "faculty",
+      "name": "Katherine Evans"
+    },
+    "351927684": {
+      "access": "false",
+      "affiliation": "student",
+      "name": "Liam Morris"
+    },
+    "928731654": {
+      "access": "true",
+      "affiliation": "faculty",
+      "name": "Michael King"
+    },
+    "479138256": {
+      "access": "true",
+      "affiliation": "student",
+      "name": "Nina Parker"
+    },
+    "618793452": {
+      "access": "false",
+      "affiliation": "student",
+      "name": "Olivia Martin"
+    },
+    "736128495": {
+      "access": "false",
+      "affiliation": "student",
+      "name": "Peter Walker"
+    },
+    "827136495": {
+      "access": "true",
+      "affiliation": "faculty",
+      "name": "Quincy Young"
+    },
+    "237594810": {
+      "access": "true",
+      "affiliation": "faculty",
+      "name": "Rachel Foster"
+    },
+    "985637401": {
+      "access": "true",
+      "affiliation": "student",
+      "name": "Sam Patel"
+    },
+    "612395874": {
+      "access": "false",
+      "affiliation": "student",
+      "name": "Tina Baker"
+    },
+    "437812965": {
+      "access": "false",
+      "affiliation": "student",
+      "name": "Uma Hill"
+    },
+    "758493162": {
+      "access": "true",
+      "affiliation": "faculty",
+      "name": "Victor Stone"
+    },
+    "291648537": {
+      "access": "false",
+      "affiliation": "student",
+      "name": "Wendy Wright"
+    },
+    "853471209": {
+      "access": "true",
+      "affiliation": "student",
+      "name": "Xander Cruz"
+    },
+    "346917852": {
+      "access": "true",
+      "affiliation": "faculty",
+      "name": "Yvonne Davis"
+    },
+    "465738291": {
+      "access": "true",
+      "affiliation": "faculty",
+      "name": "Zachary Fisher"
+    },
+    "319587426": {
+      "access": "true",
+      "affiliation": "faculty",
+      "name": "Adam Grant"
+    },
+    "671829534": {
+      "access": "false",
+      "affiliation": "student",
+      "name": "Bella Holmes"
+    },
+    "481739265": {
+      "access": "false",
+      "affiliation": "student",
+      "name": "Carlos Garcia"
+    },
+    "931472658": {
+      "access": "true",
+      "affiliation": "faculty",
+      "name": "Donna Hughes"
+    },
+    "567912384": {
+      "access": "true",
+      "affiliation": "student",
+      "name": "Edward Scott"
+    }
+  },
+  "logData": {
+    "459082134": {
+      "datetime": "09/13/2024 12:10:46",
+      "name": "Alice Johnson"
+    },
+    "281936547": {
+      "datetime": "",
+      "name": "Brian Lewis"
+    },
+    "729163548": {
+      "datetime": "09/10/2024 11:25:21",
+      "name": "Catherine Perez"
+    },
+    "581374029": {
+      "datetime": "",
+      "name": "Diane Simmons"
+    },
+    "396812547": {
+      "datetime": "",
+      "name": "Evan Mitchell"
+    },
+    "527193846": {
+      "datetime": "09/10/2024 11:25:21",
+      "name": "Franklyn Howard"
+    },
+    "197263548": {
+      "datetime": "09/10/2024 11:25:21",
+      "name": "Gloria Adams"
+    },
+    "651298347": {
+      "datetime": "09/10/2024 11:25:21",
+      "name": "Harrison Clark"
+    },
+    "512876394": {
+      "datetime": "09/10/2024 11:25:21",
+      "name": "Irene Turner"
+    },
+    "381946752": {
+      "datetime": "",
+      "name": "Jacob Bell"
+    },
+    "482759301": {
+      "datetime": "09/10/2024 11:25:21",
+      "name": "Katherine Evans"
+    },
+    "351927684": {
+      "datetime": "",
+      "name": "Liam Morris"
+    },
+    "928731654": {
+      "datetime": "09/10/2024 11:25:21",
+      "name": "Michael King"
+    },
+    "479138256": {
+      "datetime": "",
+      "name": "Nina Parker"
+    },
+    "618793452": {
+      "datetime": "",
+      "name": "Olivia Martin"
+    },
+    "736128495": {
+      "datetime": "",
+      "name": "Peter Walker"
+    },
+    "827136495": {
+      "datetime": "09/10/2024 11:25:21",
+      "name": "Quincy Young"
+    },
+    "237594810": {
+      "datetime": "09/10/2024 11:25:21",
+      "name": "Rachel Foster"
+    },
+    "985637401": {
+      "datetime": "",
+      "name": "Sam Patel"
+    },
+    "612395874": {
+      "datetime": "",
+      "name": "Tina Baker"
+    },
+    "437812965": {
+      "datetime": "",
+      "name": "Uma Hill"
+    },
+    "758493162": {
+      "datetime": "09/10/2024 11:25:21",
+      "name": "Victor Stone"
+    },
+    "291648537": {
+      "datetime": "",
+      "name": "Wendy Wright"
+    },
+    "853471209": {
+      "datetime": "",
+      "name": "Xander Cruz"
+    },
+    "346917852": {
+      "datetime": "09/10/2024 11:25:21",
+      "name": "Yvonne Davis"
+    },
+    "465738291": {
+      "datetime": "09/10/2024 11:25:21",
+      "name": "Zachary Fisher"
+    },
+    "319587426": {
+      "datetime": "09/10/2024 11:25:21",
+      "name": "Adam Grant"
+    },
+    "671829534": {
+      "datetime": "",
+      "name": "Bella Holmes"
+    },
+    "481739265": {
+      "datetime": "",
+      "name": "Carlos Garcia"
+    },
+    "931472658": {
+      "datetime": "09/10/2024 11:25:21",
+      "name": "Donna Hughes"
+    },
+    "567912384": {
+      "datetime": "",
+      "name": "Edward Scott"
     }
   }
-  
+}
