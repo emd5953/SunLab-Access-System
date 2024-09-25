@@ -252,12 +252,6 @@ class AdminWindow(QMainWindow):
         return False
 
 # Main Application
-
-if __name__ == "__main__":
-    QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)  # Enable High DPI scaling
-    QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps, True)     # Use high-DPI icons
-
-
     app = QApplication(sys.argv)
     widget = QtWidgets.QStackedWidget()
     loginwindow = LoginWindow()
