@@ -21,8 +21,8 @@ Before you can run the **SUN Lab Access System**, ensure you have the following 
    - Open the terminal in your IDE and type in the following commands:
    - <code> pip install firebase-admin </code>
    - Set up your database configuration as needed, and then generate your key for your firebase.
-   - Your key should be pasted in the database folder.
-   - You should initialize your Firebase Admin using credentials from your key and database URL.
+   - The Firebase Generated Key should be pasted in the database folder.
+   - Initialize your Firebase Admin using credentials from your key and database URL.
    - If you plan to push your local repo to your GitHub repo, you can use files such as .env and .gitignore to avoid exposing your API key.
    - To set up .env you have to install is using <code> pip install python-dotenv </code>
 
