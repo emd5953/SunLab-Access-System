@@ -21,15 +21,14 @@ Before you can run the **SUN Lab Access System**, ensure you have the following 
    - Open the terminal in your IDE and type in the following commands:
    - <code> pip install firebase-admin </code>
    - Set up your database configuration as needed, and then generate your key for your firebase.
-   - Your key should be pasted in the database folder.
-   - You should initialize your Firebase Admin using credentials from your key and database URL.
+   - The Firebase Generated Key should be pasted in the database folder.
+   - Initialize your Firebase Admin using credentials from your key and database URL.
    - If you plan to push your local repo to your GitHub repo, you can use files such as .env and .gitignore to avoid exposing your API key.
    - To set up .env you have to install is using <code> pip install python-dotenv </code>
 
 4. **Git**:
    - Git is needed to clone the repository. Install it from the official site: [Git Downloads](https://git-scm.com/downloads).
-
-   - <br>Next, clone this repository using the following git command: <br> 
+   - Next, clone this repository using the following git command: <br> 
    <code>git clone https://github.com/emd5953/SunLab-Access-System.git </code>
 
 5. **GUI Library (Tkinter, PyQt, or Kivy)**:
