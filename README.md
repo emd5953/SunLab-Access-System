@@ -28,8 +28,7 @@ Before you can run the **SUN Lab Access System**, ensure you have the following 
 
 4. **Git**:
    - Git is needed to clone the repository. Install it from the official site: [Git Downloads](https://git-scm.com/downloads).
-
-   - <br>Next, clone this repository using the following git command: <br> 
+   - Next, clone this repository using the following git command: <br> 
    <code>git clone https://github.com/emd5953/SunLab-Access-System.git </code>
 
 5. **GUI Library (Tkinter, PyQt, or Kivy)**:
