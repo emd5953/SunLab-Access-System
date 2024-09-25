@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 import sys
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QHeaderView
@@ -6,201 +8,262 @@ import datetime
 import firebase_admin
 from firebase_admin import db, credentials
 
+# Load environment variables from .env file
+load_dotenv()
 
-# Firebase initialization
-credentials_path = "database/credentials.json"
-firebase_credentials = credentials.Certificate(credentials_path)
-firebase_admin.initialize_app(firebase_credentials, {
-    "databaseURL": "https://project-1-c445c-default-rtdb.firebaseio.com/"
+# Initialize Firebase Admin using credentials and database URL from the .env file
+cred = credentials.Certificate(os.getenv("FIREBASE_CREDENTIALS"))
+firebase_admin.initialize_app(cred, {
+    "databaseURL": os.getenv("FIREBASE_DATABASE_URL")
 })
 
-# functions for pushing and retrieving data from Firebase
 
-#updates log data for a user
-def update_log_data(id_num, key, value):      
-    db.reference(f"/logData/{id_num}").update({key: value})
+# Push Date and Time to Firebase
+def pushDateTime(key, value, idnumber):
+    db.reference("/logData/" + str(idnumber)).update({key: value})
 
-#updates access data for a user
-def update_access_data(id_num, key, value):
-    db.reference(f"/labAccess/{id_num}").update({key: value})
+# Push Access Data to Firebase
+def pushAccessData(key, value, idnumber):
+    db.reference("/labAccess/" + str(idnumber)).update({key: value})
 
-#checks if user has access or not
-def check_access_status(id_num):
-    access_status = db.reference(f"/labAccess/{id_num}/access").get()
-    return access_status
+# Verify Access from Firebase
+def verifyAccess(idnumber):
+    access_reference = db.reference("/labAccess/" + str(idnumber) + "/access").get()
+    return access_reference
 
-#checks user's affiliation
-def check_user_affiliation(id_num):
-    affiliation_status = db.reference(f"/labAccess/{id_num}/affiliation").get()
-    return str(affiliation_status)
-
+# Check if User is Faculty
+def facultyAccess(idnumber):
+    access_reference = db.reference("/labAccess/" + str(idnumber) + "/affiliation").get()
+    return str(access_reference)
 
 # Login Window Class
-class UserLogin(QDialog):
+class LoginWindow(QDialog):
     def __init__(self):
-        super(UserLogin, self).__init__()
+        super(LoginWindow, self).__init__()
         loadUi("src/ui/login.ui", self)
         self.setWindowTitle("Login")
-        self.accessButton.clicked.connect(self.authenticate_user)
 
-    #authenticating user according to the button clicked
-    def authenticate_user(self):
-        user_id = self.IDTextBox.text()
-        entry_checked = self.in_radio.isChecked()
-        exit_checked = self.out_radio.isChecked()
-        admin_checked = self.admin_radio.isChecked()
-        
-        #validating user id
-        if user_id.isdigit() and len(user_id) == 9:
-            if entry_checked and check_access_status(user_id) == "true":
-                self.redLabel.setText("")
-                self.greenLabel.setText("Entry Recorded!")
-                current_time = datetime.datetime.now().strftime("%m/%d/%Y %H:%M:%S")
-                update_log_data(user_id, "datetime", str(current_time))
-           
-            #exit for valid users
-            elif exit_checked and check_access_status(user_id) == "true":
-                self.redLabel.setText("")
-                self.greenLabel.setText("Exit Recorded!")
-                current_time = datetime.datetime.now().strftime("%m/%d/%Y %H:%M:%S")
-                update_log_data(user_id, "datetime", str(current_time))
+        # Connect the access button to the login function
+        self.accessButton.clicked.connect(self.loginToAdmin)
 
-            #admin access for faculty
-            elif admin_checked and check_user_affiliation(user_id) == "faculty":
+    # Function to handle the login logic
+    def loginToAdmin(self):
+        id_number = self.IDTextBox.text()
+        in_radio = self.in_radio.isChecked()
+        out_radio = self.out_radio.isChecked()
+        admin_radio = self.admin_radio.isChecked()
+
+        if id_number.isdigit() and len(id_number) == 9:
+            if in_radio and verifyAccess(id_number) == "true":
                 self.redLabel.setText("")
-                admin_view = AdminAccessWindow()
-                widget.addWidget(admin_view)
+                self.greenLabel.setText("Card Accepted! Marked Entry")
+                formatted_datetime = datetime.datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+                pushDateTime("datetime", str(formatted_datetime), id_number)
+
+            elif out_radio and verifyAccess(id_number) == "true":
+                self.redLabel.setText("")
+                self.greenLabel.setText("Card Accepted! Marked Exit")
+                formatted_datetime = datetime.datetime.now().strftime("%m/%d/%Y %H:%M:%S")
+                pushDateTime("datetime", str(formatted_datetime), id_number)
+
+            elif admin_radio and facultyAccess(id_number) == "faculty":
+                self.redLabel.setText("")
+                adminwindow = AdminWindow()
+                widget.addWidget(adminwindow)
                 widget.setCurrentIndex(widget.currentIndex() + 1)
 
-            #handle invalid access
             else:
                 self.redLabel.setText("Access Denied")
-        
-        #handle invalid id formatting
+
         else:
             self.redLabel.setText("Access Denied")
             self.IDTextBox.clear()
 
-
 # Admin Window Class
-class AdminAccessWindow(QMainWindow):
+class AdminWindow(QMainWindow):
     def __init__(self):
-        super(AdminAccessWindow, self).__init__()
-        loadUi("main/admin.ui", self)
+        super(AdminWindow, self).__init__()
+        loadUi("src/ui/admin.ui", self)
         self.setWindowTitle("Admin Access Portal")
         header = self.studentTableView.horizontalHeader()
         header.setSectionResizeMode(QHeaderView.ResizeToContents)
-        self.refresh_data()
-        self.IDSearchTextBox.textChanged.connect(self.filter_log_data)
-        self.IDSearchTextBox2.textChanged.connect(self.filter_access_data)
-        self.refreshTableButton.clicked.connect(self.refresh_data)
+
+        # Load data when the window opens
+        self.loadData()
+
+        # Connect various UI elements to their respective functions
+        self.IDSearchTextBox.textChanged.connect(self.search_logData)
+        self.IDSearchTextBox2.textChanged.connect(self.search_labAccess)
+        self.refreshTableButton.clicked.connect(self.refreshTables)
         self.suspendAccess.clicked.connect(self.revoke_access)
-        self.giveAccess.clicked.connect(self.grant_access)
-        self.dateSelect.selectionChanged.connect(self.apply_date_filter)
-    
-    #loading data from Firebase into tables
-    def refresh_data(self):
-        log_data = db.reference("/logData").get()
-        access_data = db.reference("/labAccess").get()
+        self.suspendAccess.clicked.connect(self.refreshTables)
+        self.giveAccess.clicked.connect(self.give_access)
+        self.giveAccess.clicked.connect(self.refreshTables)
+        self.dateSelect.selectionChanged.connect(self.filterTable)
 
-        self.update_table(self.studentTableView, log_data)
-        self.update_table(self.adminTableView, access_data)
+    # Load logData and labAccess data into the tables
+    def loadData(self):
+        data_reference = db.reference("/logData")
+        access_reference = db.reference("/labAccess")
+        log_data = data_reference.get()
+        access_data = access_reference.get()
 
-    #updating specific tables with provided data
-    def update_table(self, table_view, data):
-        if data:
+        if log_data:
             row = 0
-            table_view.setRowCount(len(data.items()))
-            for key, value in data.items():
-                table_view.setItem(row, 0, QtWidgets.QTableWidgetItem(key))
+            self.studentTableView.setRowCount(len(log_data.items()))
+            for key, value in log_data.items():
+                self.studentTableView.setItem(row, 0, QtWidgets.QTableWidgetItem(key))
                 col = 1
                 for k, v in value.items():
-                    table_view.setItem(row, col, QtWidgets.QTableWidgetItem(v))
+                    self.studentTableView.setItem(row, col, QtWidgets.QTableWidgetItem(v))
                     col += 1
                 row += 1
-    
-    #filters log data based on search input 
-    def filter_log_data(self):
+
+        if access_data:
+            row = 0
+            self.adminTableView.setRowCount(len(access_data.items()))
+            for key, value in access_data.items():
+                self.adminTableView.setItem(row, 0, QtWidgets.QTableWidgetItem(key))
+                col = 1
+                for k, v in value.items():
+                    self.adminTableView.setItem(row, col, QtWidgets.QTableWidgetItem(v))
+                    col += 1
+                row += 1
+
+   # Search function for logData table
+    def search_logData(self):
         search_term = self.IDSearchTextBox.text().lower()
-        self.filter_table(self.studentTableView, search_term)
-
-    #filters access data based on search input
-    def filter_access_data(self):
-        search_term = self.IDSearchTextBox2.text().lower()
-        self.filter_table(self.adminTableView, search_term)
-
-    #filters rows in a table based on search input
-    def filter_table(self, table, search_term):
         if search_term.isnumeric() or not search_term:
-            for row in range(table.rowCount()):
-                item = table.item(row, 0)
-                table.setRowHidden(row, not item.text().lower().startswith(search_term))
-    
-    #function to grant access to a user
-    def grant_access(self):
-        selected = self.adminTableView.selectedItems()
-        if selected:
-            user_id = selected[0].text()
-            update_access_data(user_id, "access", "true")
-            self.messageLabel.setText("Access Granted")
-    
-    #function to revoke access to a user
-    def revoke_access(self):
-        selected = self.adminTableView.selectedItems()
-        if selected:
-            user_id = selected[0].text()
-            update_access_data(user_id, "access", "false")
-            self.messageLabel.setText("Access Revoked")
-    
-    #filter based on a selected date
-    def apply_date_filter(self):
-        selected_date = self.dateSelect.selectedDate().toString("MM/dd/yyyy")
-        all_day_checked = self.allDayRadio.isChecked()
-        time_filter = self.timeData.text() if not all_day_checked else None
+            for row in range(self.studentTableView.rowCount()):
+               item = self.studentTableView.item(row, 0)  # Get the item in the first column
+               if item is not None and item.text().lower().startswith(search_term):
+                   self.studentTableView.setRowHidden(row, False)
+               else:
+                   self.studentTableView.setRowHidden(row, True)
 
+    # Search function for labAccess table
+    def search_labAccess(self):
+        search_term = self.IDSearchTextBox2.text().lower()
+        if search_term.isnumeric() or not search_term:
+            for row in range(self.adminTableView.rowCount()):
+                item = self.adminTableView.item(row, 0)  # Get the item in the first column
+                if item is not None and item.text().lower().startswith(search_term):
+                    self.adminTableView.setRowHidden(row, False)
+                else:
+                    self.adminTableView.setRowHidden(row, True)
+
+
+    # Refresh the data in the tables
+    def refreshTables(self):
         self.studentTableView.clearContents()
-        self.studentTableView.setRowCount(0)
-        self.filter_by_date(selected_date, time_filter)
-    
-    #filter date by date
-    def filter_by_date(self, date_str, time_str=None):
-        log_data = db.reference("/logData").get()
+        self.adminTableView.clearContents()
+        self.loadData()
+
+    # Grant access to selected ID
+    def give_access(self):
+        selected_items = self.adminTableView.selectedItems()
+        if selected_items:
+            selected_row = selected_items[0].row()
+            selected_col = selected_items[0].column()
+            cell_data = self.adminTableView.item(selected_row, selected_col).text()
+        pushAccessData("access", "true", cell_data)
+        self.messageLabel.setStyleSheet("color: #2ecc71; font-size: 12pt; font-weight: bold;")
+        self.messageLabel.setText("Access Granted")
+
+    # Revoke access for selected ID
+    def revoke_access(self):
+        selected_items = self.adminTableView.selectedItems()
+        if selected_items:
+            selected_row = selected_items[0].row()
+            selected_col = selected_items[0].column()
+            cell_data = self.adminTableView.item(selected_row, selected_col).text()
+        pushAccessData("access", "false", cell_data)
+        self.messageLabel.setStyleSheet("color: #e74c3c; font-size: 12pt; font-weight: bold;")
+        self.messageLabel.setText("Access Revoked")
+
+    # Filter table by date and time
+    def filterTable(self):
+        allDayRadio = self.allDayRadio.isChecked()
+        selected_date = self.dateSelect.selectedDate()
+        formatted_date = selected_date.toString("MM/dd/yyyy")
+
+        if not allDayRadio:
+            time_data = self.timeData.text()
+            self.studentTableView.clearContents()
+            self.studentTableView.setRowCount(0)
+            self.load_filtered_data(formatted_date, time_data)
+        else:
+            self.studentTableView.clearContents()
+            self.studentTableView.setRowCount(0)
+            self.load_filtered_data(formatted_date, None)
+
+    # Load filtered data by date and optionally by time
+    def load_filtered_data(self, formatted_date, time_data):
+        data_reference = db.reference("/logData")
+        log_data = data_reference.get()
+
         if log_data:
-            filtered_rows = [
-                (key, value)
-                for key, value in log_data.items()
-                if value.get("datetime", "").startswith(date_str) and (not time_str or self.is_time_valid(value.get("datetime", ""), time_str))
-            ]
-            self.populate_table(self.studentTableView, filtered_rows)
+            filtered_rows = 0
 
-    #validates if time in the log is greater than or equal to the filtered time
-    def is_time_valid(self, datetime_str, time_str):
-        date_part, time_part = datetime_str.split()
-        return self.compare_times(time_part.strip(), time_str.strip())
-    
-    #compare two different times
-    def compare_times(self, time1, time2):
-        hour1, minute1 = map(int, time1.split(":"))
-        hour2, minute2 = map(int, time2.split(":"))
-        return hour1 > hour2 or (hour1 == hour2 and minute1 >= minute2)
-    
-    #populate a table with filtered time
-    def populate_table(self, table, data):
-        table.setRowCount(len(data))
-        for row, (key, value) in enumerate(data):
-            table.setItem(row, 0, QtWidgets.QTableWidgetItem(key))
-            for col, (k, v) in enumerate(value.items(), start=1):
-                table.setItem(row, col, QtWidgets.QTableWidgetItem(v))
+            for key, value in log_data.items():
+                date_item = value.get("datetime")
+                if date_item:
+                    date_parts, time_parts = date_item.split()
+                    date_str = date_parts.strip()
+                    time_str = time_parts.strip()
+                    if date_str == formatted_date:
+                        if not time_data or (time_data and self.is_time_after(time_str, time_data)):
+                            filtered_rows += 1
 
+            self.studentTableView.setRowCount(filtered_rows)
+
+            row = 0
+            for key, value in log_data.items():
+                date_item = value.get("datetime")
+                if date_item:
+                    date_parts, time_parts = date_item.split()
+                    date_str = date_parts.strip()
+                    time_str = time_parts.strip()
+                    if date_str == formatted_date:
+                        if not time_data or (time_data and self.is_time_after(time_str, time_data)):
+                            self.studentTableView.setItem(row, 0, QtWidgets.QTableWidgetItem(key))
+                            col = 1
+                            for k, v in value.items():
+                                self.studentTableView.setItem(row, col, QtWidgets.QTableWidgetItem(v))
+                                col += 1
+                            row += 1
+
+    # Helper function to compare times
+    def is_time_after(self, time_str, time_data):
+        if not time_data:
+            return True
+
+        time_parts = time_str.split(":")
+        specified_time_parts = time_data.split(":")
+
+        if len(time_parts) >= 2 and len(specified_time_parts) >= 2:
+            time_hour, time_minute = map(int, time_parts[:2])
+            specified_hour, specified_minute = map(int, specified_time_parts[:2])
+
+            if time_hour > specified_hour or (time_hour == specified_hour and time_minute >= specified_minute):
+                return True
+
+        return False
 
 # Main Application
-app = QApplication(sys.argv)
-widget = QtWidgets.QStackedWidget()
-login_view = UserLogin()
-widget.addWidget(login_view)
-widget.show()
 
-try:
-    sys.exit(app.exec_())
-except Exception as e:
-    print(f"Exiting application: {e}")
+if __name__ == "__main__":
+    QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)  # Enable High DPI scaling
+    QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps, True)     # Use high-DPI icons
+
+
+    app = QApplication(sys.argv)
+    widget = QtWidgets.QStackedWidget()
+    loginwindow = LoginWindow()
+    widget.addWidget(loginwindow)
+    widget.show()
+
+    try:
+        sys.exit(app.exec_())
+    except:
+        print("Exiting Application")
