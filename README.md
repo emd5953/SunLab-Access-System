@@ -38,5 +38,3 @@ Before you can run the **SUN Lab Access System**, ensure you have the following 
 
 6. **IDE or Code Editor** (Optional):
    - Any Python IDE or text editor like VS Code, PyCharm, or Sublime Text.
-
-
