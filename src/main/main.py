@@ -19,6 +19,13 @@ firebase_admin.initialize_app(cred, {
 })
 
 
+def test_connection():
+    test_ref = db.reference("/testConnection")
+    test_ref.set({"status": "connected"})
+    print("Connection successful!")
+
+test_connection()
+
 # Push Date and Time to Firebase
 def pushDateTime(key, value, idnumber):
     db.reference("/logData/" + str(idnumber)).update({key: value})
